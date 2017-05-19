@@ -1,0 +1,415 @@
+﻿ul,li {
+        list-style:none;
+        margin:0;
+        padding:0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size:14px;
+    margin-top:0;
+}
+
+a {
+    text-decoration:none;
+    color:#333;
+}
+
+a:hover {
+    text-decoration:none;
+    color:#00b7ee ;
+}
+
+a:active {
+    text-decoration:none;
+}
+
+a:visited {
+    text-decoration:none;
+}
+
+body {
+    font-family:微软雅黑;
+    font-size:12px;
+    background:#fff;
+}
+
+.logo img {
+    width:100%;
+
+}
+
+.pt15 {
+    padding-top:15px;
+}
+
+.mt15 {
+    margin-top:15px;
+}
+
+.img-news .carousel-indicators {
+    bottom:-10px;
+}
+
+.img-news .carousel-caption{
+    bottom:-5px;
+}
+
+.img-news .carousel-inner .item img {
+    width:100%;
+    overflow:hidden;
+    height:150px;
+}
+
+.news-list h3, .notice-list h3 {
+    font-size:14px;
+    font-weight:bold;
+    color:#0365c6;
+    margin:0;
+}
+
+.news-list ul li a {
+    display:block;
+    height:30px;
+    line-height:30px;
+    padding-left:20px;
+    background:url(../../img/xw-ico.png) no-repeat 5px center;
+    overflow:hidden;
+    border-bottom:1px solid #eee;
+}
+
+.notice-list ul li a {
+    display:block;
+    line-height:25px;
+    padding-left:20px;
+    background:url(../../img/notice-ico.png) no-repeat left 5px;
+    background-size:16px;
+}
+
+.notice-list a {
+    color:#333;
+}
+
+.information .nav-tabs {
+    border:none;
+}
+
+.information .tab-content {
+    border:solid 1px #75cadb;
+    padding:10px;
+}
+
+.information .nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.information .nav>li>a {
+    display:inline-block;
+    width:100%;
+    padding:0;
+    text-align:center;
+    background:#eee;
+    border:1px solid #ddd;
+    line-height:30px;
+    margin-bottom:15px;
+   
+}
+
+.information .nav-tabs > li {
+    float:none;
+    display:inline-block;
+    width:32%;
+    margin:0;
+    padding:0;
+}
+
+.information .nav-tabs>li.active>a, .information .nav-tabs>li.active>a:focus, .information .nav-tabs>li.active>a:hover {
+    border:1px #75cadb solid;
+    background:#bce8f1;
+    color:#0365c6;
+}
+
+.information .tab-content h3 {
+    text-align:center;
+    font-weight:bold;
+    color:#0365c6;
+    border-bottom:1px solid #bce8f1;
+    padding-bottom:10px;
+}
+
+.img-news {
+    position:relative;
+}
+
+.img-news .nav-tabs{
+    position:absolute;
+    top:127px;
+    left:0;
+    z-index:1000;
+    margin:0 15px;
+
+}
+
+.img-news .nav-tabs>li>a {
+    margin-right: 2px;
+    line-height:17px;
+    border-radius: 4px 4px 0 0;
+    background:#bce8f1;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.img-news .nav-tabs>li>a:hover {
+    border-color:#75cadb;
+    background:#75cadb;
+    color:#fff;
+}
+
+    .img-news .tab-content {
+        border:1px solid #75cadb;
+        padding:15px;
+    }
+
+.img-news .nav-tabs>li.active>a, .img-news .nav-tabs>li.active>a:focus, .img-news .nav-tabs>li.active>a:hover {
+    border:1px #75cadb solid;
+    background:#fff;
+    border-bottom-color:#fff;
+    color:#0365c6;
+}
+
+
+    .img-news .tab-content h3 {
+        text-align:center;
+        font-weight:bold;
+        color:#0365c6;
+        border-bottom:1px solid #bce8f1;
+        padding-bottom:10px;
+    }
+
+.department-list a {
+    display:inline-block;
+    width:48%;
+    margin:5px 0;
+}
+
+.modal {
+    top:22%;
+}
+
+.success {
+    line-height:25px;
+    font-size:14px;
+    padding-top:50px;
+    background:url(../../img/cg-ico.png) no-repeat center 10px;
+    background-size:32px;
+}
+
+.handle .table>tbody>tr>td, .handle .table>tbody>tr>th, .handle .table>tfoot>tr>td, .handle .table>tfoot>tr>th, .handle .table>thead>tr>td, .handle .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom: 1px solid #bce8f1;
+    border-top:none;
+}
+
+.handle .table > thead > tr > th {
+    border-bottom:none;
+    background:#bce8f1;
+    border-bottom:none;
+}
+
+.handle .table{
+    margin:0;
+}
+
+.handle .panel-body,.search .panel-body {
+    padding:0;
+}
+
+.handle .pagination img,.search .pagination img {
+    width:16px;
+}
+
+.handle .left,.handle .right,.search .left,.search .right  {
+    padding-top:4px;
+    padding-bottom:7px;
+}
+
+.bt {
+    font-size:14px;
+    font-weight:bold;
+    color:#0365c6;
+}
+
+.search .nav .btn {    
+    font-size:14px;
+    padding:5px 15px;
+}
+
+.search .nav .btn:hover {    
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    opacity:0.8;
+    box-shadow:none;
+}
+
+.mb15 {
+    margin-bottom:15px;
+}
+
+.form-control.down-box {
+    box-shadow:none;
+    border:1px solid #75cadb;
+    -webkit-appearance:none;
+    background:url(../../img/xx-ico.png) no-repeat 98% center;
+    background-size:16px;
+    border-radius:0;
+}
+
+.evaluate input[type=checkbox], input[type=radio] {
+    margin-top:2px;
+}
+
+.evaluate .radio {
+    margin-bottom:20px;
+}
+
+.form-control{
+    box-shadow:none;
+}
+
+.notice-list .btn {
+    color:#fff;
+}
+
+.fw-ico1 {
+    background:url(../../img/fw-ico1.png) no-repeat center center;
+    background-size:16px;
+    display:block;
+    float:left;
+    width:16px;
+    height:16px;
+    margin:0 10px;
+}
+
+.fw-ico2 {
+    background:url(../../img/fw-ico2.png) no-repeat center center;
+    background-size:16px;
+    display:block;
+    float:left;
+    width:16px;
+    height:16px;
+    margin:0 10px;
+}
+
+.fw-ico3 {
+    background:url(../../img/fw-ico3.png) no-repeat center center;
+    background-size:16px;
+    display:block;
+    float:left;
+    width:16px;
+    height:16px;
+    margin:0 10px;
+}
+
+.fw-ico4 {
+    background:url(../../img/fw-ico4.png) no-repeat center center;
+    background-size:16px;
+    display:block;
+    float:left;
+    width:16px;
+    height:16px;
+    margin:0 10px;
+}
+
+.fw-ico5 {
+    background:url(../../img/fw-ico5.png) no-repeat center center;
+    background-size:16px;
+    display:block;
+    float:left;
+    width:16px;
+    height:16px;
+    margin:0 10px;
+}
+
+.fw-ico6 {
+    background:url(../../img/fw-ico6.png) no-repeat center center;
+    background-size:16px;
+    display:block;
+    float:left;
+    width:16px;
+    height:16px;
+    margin:0 10px;
+}
+
+.fw-list a {
+    text-align:left;
+    padding-left:15px;
+}
+
+.hf-top {
+    background:#0365c6;
+    color:#fff;
+    position:relative;
+    line-height:45px;
+    height:45px;
+    text-align:center;
+}
+
+.hf-top h3 {
+    line-height:45px;
+    height:45px;
+    font-size:16px;
+}
+
+    .hf-top .fh-ico {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+
+    .hf-top .yh-ico {
+        position:absolute;
+        right:0;
+        top:0;
+    }
+
+.jqr {
+    font-size:14px;
+}
+
+.znhf.media, .znhf .media-body {
+    overflow:auto;
+}
+
+.znhf .popover {
+    position:relative;
+    margin-left:20px;
+    border-radius:4px;
+}
+
+    .znhf .popover.right > .arrow {
+        top:22px;
+    }
+
+.znhf .popover-content {
+    padding-bottom:5px;
+}
+
+.znhf p {
+    margin:5px 0;
+}
+
+.znhf .popover.right {
+    left:10px;
+    max-width:94%;
+}
+
+.znhf .popover.left {
+    right:10px;
+    left:auto;
+    max-width:100%;
+}

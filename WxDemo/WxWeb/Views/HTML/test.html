@@ -1,0 +1,227 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>青羊区政务</title>
+    <link href="~/Scripts/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="assets/fonts/iconfont.css"> -->
+    <link href="~/Scripts/assets/css/footer.css" rel="stylesheet" />
+    <!-- <script src="assets/fonts/iconfont.js"></script> -->
+    <link href="~/Scripts/assets/css/css.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="logo">
+                <img src="~/Scripts/img/logo.jpg" />
+            </div>
+        </div>
+    </div>
+    <div class="container" style="min-height: 100%;">
+        <div class="row notfooter">
+            <div class="col-md-12 mt15">
+                <div class="notice-list">
+                    <p>当前测试项目：图片提交上传、地图导航</p>
+                    <div class="panel panel-info mt15">
+                        <div class="panel-heading"><h3>图片</h3></div>
+                        <div class="panel-body evaluate">
+                            <div style="width:300px;height:200px;"><img id="Img" src="~/Scripts/img/logo.jpg" style="max-width:100%;height:auto;max-height:200px;" /></div>
+                            <div class="mt15">
+                                <a id="modal-647806" onclick="get()" href="#modal-container-647806" role="button" data-toggle="modal" class="btn btn-info btn-block">提交</a>
+                                <a role="button" data-toggle="modal" class="btn btn-info btn-block" onclick="updateImg()">上传</a>
+                                <span id="text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   	
+    <!-- <div id="footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav>
+                            <ul class="footer-nav">
+                                <li><a href="test01">中心概况</a></li>
+                                <li><a href="test02">信息公开</a></li>
+                                <li><a href="test03">在线预约</a></li>
+                                <li><a href="test04">我的办理</a></li>
+                                <li><a href="test05">办件查询</a></li>
+                                <li><a href="test06">办事服务</a></li>
+                                <li><a href="test07">自助取件</a></li>
+                                <li class="active"><a href="test08">服务评价</a></li>
+                                <li><a href="test10">生活服务</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <script src="~/Scripts/assets/js/jquery.min.js"></script>
+    <script src="~/Scripts/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script id="js" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript">
+        var localIds;
+        var appid;
+        var timestamp;
+        var signature;
+        var Url = location.href.split("#")[0];
+        var noncestr = randomString();
+        $(function () {
+            $.ajax({
+                url: "GetMassages",
+                type: "POST",
+                data: { url: Url, nonceStr: noncestr },//encodeURIComponent
+                success: function (data) {
+                    appid = data.appid;
+                    timestamp = data.timestamp;
+                    signature = data.signature;
+
+                    //通过config接口注入权限验证配置
+                    wx.config({
+                        debug: false,
+                        appId: appid,
+                        timestamp: timestamp,
+                        nonceStr: noncestr,  //生成签名的随机串
+                        signature: signature,  //签名
+                        jsApiList: ['chooseImage', 'uploadImage',
+                                    'downloadImage', 'getLocation', 'openLocation'
+                        ]
+                    });
+                    /** config信息验证失败会执行error函数，
+                     * 如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，
+                     * 也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                     */
+                    wx.error(function (res) {
+                    });
+                }
+            })
+        })
+        function get() {
+            wx.chooseImage({
+                count: 1,
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (data) {
+                    localIds = data.localIds[0].toString(); // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+
+                    //iOS微信6.5.3及其之后的版本 window.__wxjs_is_wkwebview 为true时是使用WKWebview，为 false或者 “undefine”时是 UIWebview 。
+                    if (window.__wxjs_is_wkwebview && window.__wxjs_is_wkwebview != "undefind") {
+
+                        //获取本地图片接口
+                        wx.getLocalImgData({
+                            localId: localIds, // 图片的localID
+                            success: function (res) {
+                                var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+                                $("#Img").attr("src", localData);
+                            }
+                        });
+                    } else //UIWebview内核或者是Android系统的
+                    {
+                        $("#Img").attr("src", localIds);
+                    }
+                },
+                fail: function (res) {
+                }
+
+            });
+        }
+        function updateImg() {
+            wx.uploadImage({
+                localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: function (res) {
+                    var serverId = res.serverId; // 返回图片的服务器端ID
+                    $.ajax({
+                        url: "GetMultimedia",
+                        type: "POST",
+                        data: { MEDIA_ID: serverId },
+                        success: function (data) {
+                            alert(data);
+                        }
+                    });
+                }
+            });
+        }
+        function map() {
+            var latitude;
+            var longitude;
+            wx.getLocation({
+                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    var speed = res.speed; // 速度，以米/每秒计
+                    var accuracy = res.accuracy; // 位置精度
+                }
+            });
+            wx.openLocation({
+                latitude: latitude, // 纬度，浮点数，范围为90 ~ -90
+                longitude: longitude, // 经度，浮点数，范围为180 ~ -180。
+                name: '高发大厦', // 位置名
+                address: '成都市高新区九兴大道6号', // 地址详情说明
+                scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                infoUrl: '查看地图' // 在查看位置界面底部显示的超链接,可点击跳转
+            });
+        }
+        //function ImgSize(){
+        //    var imageArr = document.getElementById("Img");
+        //    var imageRate = imageArr.offsetWidth / imageArr.offsetHeight;
+
+        //    if (imageArr.offsetWidth > maxWidth) {
+        //        imageArr.style.width = maxWidth + "px";
+        //        imageArr.style.Height = maxWidth / imageRate + "px";
+        //    }
+
+        //    if (imageArr.offsetHeight > maxHeight) {
+        //        imageArr.style.width = maxHeight * imageRate + "px";
+        //        imageArr.style.Height = maxHeight + "px";
+        //    }
+        //}
+
+        //随机字符串生成函数
+        function randomString(leng) {
+            var len = leng || 32;
+            var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    //默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
+            var maxPos = $chars.length;
+            var pwd = '';
+            for (i = 0; i < len; i++) {
+                pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+            }
+            return pwd;
+        }
+    	
+    </script>
+    <!--<div class="modal fade" id="modal-container-647806" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">服务评价</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="success text-center p20">
+                        <span class="cg-ico2"></span>评价成功！
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+
+</body>
+</html>

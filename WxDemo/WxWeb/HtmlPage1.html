@@ -1,0 +1,61 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>test</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div>
+        <button id="code">点击</button>
+    </div>
+    <script>
+
+        $(function(){
+
+            var code = GetQueryString('code');
+            var sendMsg;
+
+            $.ajax({
+                url: "/test/getOpenId",
+                data: { code: code },
+                success: function (data) {
+                    sendMsg = {
+                    "touser": data.openid,
+                    "msgtype": "text",
+                    "text":
+                    {
+                        "content": "你好，用户：" + data.openid
+                    }
+                }
+            }
+
+            });
+
+        });
+
+        $("#code").click(function(){
+            $.ajax({
+                url: "/MsgMgr/sendMsg",
+                data:{text:sendMsg},
+                success: function (data) {
+
+                }
+
+            });
+
+
+        });
+
+        //js获取地址栏参数
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </script>
+</body>
+</html>

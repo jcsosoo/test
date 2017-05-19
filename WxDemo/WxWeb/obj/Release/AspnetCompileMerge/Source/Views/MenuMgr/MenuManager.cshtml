@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "菜单管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MenuManager</h2>
+<div class="row">
+    <div class="col-md-4">
+            <h3>获取菜单</h3>
+            <p><a class="btn btn-default" href="#" id="GetMenu">GetMenu &raquo;</a></p>
+        <h3>创建菜单</h3>
+        <p><a class="btn btn-default" href="#" id="CreateMenu">CreateMenu &raquo;</a></p>
+        <h3>删除菜单</h3>
+        <p><a class="btn btn-default" href="#" id="DelMenu">DelMenu &raquo;</a></p>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="display:block;width:600px">菜单内容</h3>
+                    <textarea name="" id="MenuText" cols="30" rows="10" style="width:600px;max-width:600px"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <h3 style="display:block;width:600px">返回消息</h3>
+                    <textarea name="" id="Msg" cols="30" rows="10" style="width:600px;max-width:600px"></textarea>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<script>
+    $(function () {
+        $("#GetMenu").click(function () {
+            $.ajax({
+                url: "/MenuMgr/GetMenu",
+                success: function (data) {
+                    $("#Msg").val(data);
+                },
+                error: function (data) {
+                    $("#Msg").val(data);
+                }
+            });
+        });
+
+
+        $("#CreateMenu").click(function () {
+            var m = $("#MenuText").val();
+            if (m == null || m=="") {
+                alert("请输入菜单内容");
+                return;
+            }
+            $.ajax({
+                url: "/MenuMgr/CreateMenu",
+                data: {menutext:m },
+                success: function (data) {
+                    $("#Msg").val(data);
+                },
+                error: function (data) {
+                    $("#Msg").val(data);
+                }
+            });
+        });
+
+        $("#DelMenu").click(function () {
+            $.ajax({
+                url: "/MenuMgr/DeleteMenu",
+                success: function (data) {
+                    $("#Msg").val(data);
+                },
+                error: function (data) {
+                    $("#Msg").val(data);
+                }
+            });
+        });
+    });
+</script>
